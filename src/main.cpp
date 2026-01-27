@@ -1,0 +1,22 @@
+#include <iostream>
+#include "DistroDetector.h"
+
+int main(int argc, char* argv[]) {
+    DistroInfo info = DistroDetector::getDistroInfo();
+    DistroConfig cfg = DistroDetector::getDistroConfig(info);
+
+    if (cfg.id == "unsupported") {
+        std::cerr << "Error: Unsupported Linux Distribution." << std::endl;
+        return 1;
+    }
+
+    // Print Results --- Testing Purposes
+    std::cout << "-----    DistroDetector Test    -----" << std::endl;
+    std::cout << "Raw ID:          " << info.id << std::endl;
+    std::cout << "Like:            " << info.id_like << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "Package Manager: " << cfg.manager << std::endl;
+    std::cout << "Command Prefix:  " << cfg.cmd << std::endl;
+
+    return 0;
+}
