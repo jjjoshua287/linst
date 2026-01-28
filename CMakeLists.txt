@@ -11,6 +11,7 @@ add_executable(linst
     src/PackageResolver.cpp
     src/DistroDetector.h
     src/PackageData.h
+    src/PackageResolver.h
 )
 
 target_include_directories(linst PRIVATE
