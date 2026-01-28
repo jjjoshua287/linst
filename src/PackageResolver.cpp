@@ -31,13 +31,11 @@ std::string normalize(std::string str) {
     }
     return str;
 }
-
 namespace PackageResolver {
+    static std::vector<Category> packages;
+    static std::unordered_map<std::string, const Package*> pkgMap;
 
-    std::unordered_map<std::string, const Package*> buildPackageIndex() {
-        std::vector<Category> packages = getPackageData();
-        std::unordered_map<std::string, const Package*> pkgMap;
-
+    void buildPackageIndex() {
         for (const auto& category : packages) { 
             // Categories
             for (const auto& package : category.packages) { 
@@ -46,10 +44,22 @@ namespace PackageResolver {
                 pkgMap[normalString] = &package; // build unordered_map
             }
         }
-        return pkgMap;
     }
 
-    std::string getPackageNames(vector<string> packages, std::string pm){
-        return pm;
+    const Package* findByName(std::string name) { 
+        std::string key = normalize(name); // Normalized name
+        auto it = pkgMap.find(key);
+        if (it == pkgMap.end()) {
+            return nullptr;
+        }
+        return it->second;
+    }
+
+    void init() {
+        packages = getPackageData();
+        buildPackageIndex();
+        const Package* ptr = findByName("firefox");
+        std::cout << ptr->name << std::endl;
+        
     }
 }

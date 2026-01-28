@@ -7,8 +7,9 @@
 #include <PackageData.h>
 
 namespace PackageResolver {
-    std::unordered_map<std::string, const Package*> buildPackageIndex();
+    void buildPackageIndex();
     std::string getPackageNames(std::vector<std::string> packages, std::string pm);
+    void init();
 }
 
 #endif

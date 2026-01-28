@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DistroDetector.h"
+#include "PackageResolver.h"
 
 void test(DistroInfo info, DistroConfig cfg) {
     // Print Results --- Testing Purposes
@@ -19,5 +20,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Unsupported Linux Distribution." << std::endl;
         return 1;
     }
+    PackageResolver::init();
+
     return 0;
 }
