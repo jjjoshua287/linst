@@ -12,26 +12,29 @@
 #include "PackageData.h"
 #include "PackageResolver.h"
 
-bool is_available(const Package& package, std::string pm) {
-    // Optimize Later ...
-    if (pm == "apt") {return !(package.apt.empty());}
-    else if (pm == "dnf") {return !(package.dnf.empty());}
-    else if (pm == "pacman") {return !(package.pacman.empty());}
-    return false;
-}
+// Anonymous Namespace
+namespace {
 
-std::string normalize(std::string str) {
-    // Remove all spaces from string
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-    for (char& c : str) {
-        c = std::tolower(static_cast<unsigned char>(c));
+    std::vector<Category> packages;
+    std::unordered_map<std::string, const Package*> pkgMap;
+    std::vector<const Package*> packagePtrs;
+
+    bool is_available(const Package& package, std::string pm) {
+        // Optimize Later ...
+        if (pm == "apt") {return !(package.apt.empty());}
+        else if (pm == "dnf") {return !(package.dnf.empty());}
+        else if (pm == "pacman") {return !(package.pacman.empty());}
+        return false;
     }
-    return str;
-}
-namespace PackageResolver {
-    static std::vector<Category> packages;
-    static std::unordered_map<std::string, const Package*> pkgMap;
-    static std::vector<const Package*> packagePtrs;
+
+    std::string normalize(std::string str) {
+        // Remove all spaces from string
+        str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+        for (char& c : str) {
+            c = std::tolower(static_cast<unsigned char>(c));
+        }
+        return str;
+    }
 
     const Package* findByName(std::string name) { 
         std::string key = normalize(name); // Normalized name
@@ -71,12 +74,16 @@ namespace PackageResolver {
                 i++;
         }
     }
+} // End Anonymous Namespace
 
+// Public Namespaces
+namespace PackageResolver {
+    
     void init(std::vector<std::string> userPackages, DistroConfig distro) {
         packages = getPackageData();
         buildPackageIndex();
         buildPackageList(userPackages, distro.manager);
-        for (const auto& pkg :  packagePtrs)  {
+        for (const auto& pkg :  packagePtrs) {
             std::cout << pkg->name << " ";
         }
         std::cout << std::endl;

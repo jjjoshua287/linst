@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <PackageData.h>
+#include "PackageData.h"
+#include "DistroDetector.h"
 
 namespace PackageResolver {
-    void buildPackageIndex();
-    void buildPackageList(std::vector<std::string> userPackages, std::string pm);
+    
     void init(std::vector<std::string> userPackages, DistroConfig distro);
 }
 
