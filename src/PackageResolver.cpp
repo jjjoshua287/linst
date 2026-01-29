@@ -67,7 +67,7 @@ namespace PackageResolver {
                 std::cerr << s << std::endl;
                 continue;
             }
-                packagePtrs[i] = ptr;
+                packagePtrs.push_back(ptr);
                 i++;
         }
     }
@@ -77,7 +77,8 @@ namespace PackageResolver {
         buildPackageIndex();
         buildPackageList(userPackages, distro.manager);
         for (const auto& pkg :  packagePtrs)  {
-            std::cout << pkg->name;
+            std::cout << pkg->name << " ";
         }
+        std::cout << std::endl;
     }
 }

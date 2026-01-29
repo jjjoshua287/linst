@@ -23,7 +23,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     std::vector<std::string> usrPkg; // temp testing vector
-    usrPkg[0] = "firefox";
+    usrPkg.push_back("firefox");
+    usrPkg.push_back("git");
     PackageResolver::init(usrPkg, cfg);
 
     return 0;
