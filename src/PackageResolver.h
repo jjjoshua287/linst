@@ -8,8 +8,8 @@
 
 namespace PackageResolver {
     void buildPackageIndex();
-    std::string getPackageNames(std::vector<std::string> packages, std::string pm);
-    void init();
+    void buildPackageList(std::vector<std::string> userPackages, std::string pm);
+    void init(std::vector<std::string> userPackages, DistroConfig distro);
 }
 
 #endif

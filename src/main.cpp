@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include "DistroDetector.h"
 #include "PackageResolver.h"
 
@@ -20,7 +22,9 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Unsupported Linux Distribution." << std::endl;
         return 1;
     }
-    PackageResolver::init();
+    std::vector<std::string> usrPkg; // temp testing vector
+    usrPkg[0] = "firefox";
+    PackageResolver::init(usrPkg, cfg);
 
     return 0;
 }
