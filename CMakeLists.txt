@@ -9,11 +9,14 @@ add_executable(linst
     src/main.cpp
     src/DistroDetector.cpp
     src/PackageResolver.cpp
+    src/StringUtils.cpp
     src/DistroDetector.h
     src/PackageData.h
     src/PackageResolver.h
+    src/StringUtils.h
 )
 
 target_include_directories(linst PRIVATE
     src
+    "${CMAKE_SOURCE_DIR}/include"
 )

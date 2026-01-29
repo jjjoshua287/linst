@@ -3,8 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include "PackageData.h"
 #include "DistroDetector.h"
 
 namespace PackageResolver {

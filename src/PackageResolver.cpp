@@ -1,16 +1,14 @@
+#include "PackageResolver.h"
+
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
-#include <algorithm>
-#include <cctype>
-#include <locale>
 #include <unordered_map>
 #include <format>
 
 #include "DistroDetector.h"
 #include "PackageData.h"
-#include "PackageResolver.h"
+#include "StringUtils.h"
 
 // Anonymous Namespace
 namespace {
@@ -27,17 +25,8 @@ namespace {
         return false;
     }
 
-    std::string normalize(std::string str) {
-        // Remove all spaces from string
-        str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-        for (char& c : str) {
-            c = std::tolower(static_cast<unsigned char>(c));
-        }
-        return str;
-    }
-
     const Package* findByName(std::string name) { 
-        std::string key = normalize(name); // Normalized name
+        std::string key = StringUtils::normalize(name); // Normalized name
         auto it = pkgMap.find(key);
         if (it == pkgMap.end()) {
             return nullptr;
@@ -50,7 +39,7 @@ namespace {
             // Categories
             for (const auto& package : category.packages) { 
                 // Packages in category
-                std::string normalString = normalize(package.name);
+                std::string normalString = StringUtils::normalize(package.name);
                 pkgMap[normalString] = &package;
             }
         }
@@ -76,7 +65,7 @@ namespace {
     }
 } // End Anonymous Namespace
 
-// Public Namespaces
+// Public Namespace
 namespace PackageResolver {
     
     void init(std::vector<std::string> userPackages, DistroConfig distro) {
