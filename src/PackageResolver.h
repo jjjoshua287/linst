@@ -7,7 +7,7 @@
 
 namespace PackageResolver {
     
-    void init(std::vector<std::string> userPackages, DistroConfig distro);
+    std::vector<std::string> resolvePackages(std::vector<std::string> userPackages, DistroConfig distro);
 }
 
 #endif
