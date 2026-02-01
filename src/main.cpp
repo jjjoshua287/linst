@@ -5,7 +5,7 @@
 #include "PackageResolver.h"
 
 void buildCommand(std::vector<std::string> names, std::string prefix) {
-    std::cout << prefix << " ";
+    std::cout << "Installation Command: " << prefix << " ";
     for (const auto& name : names) {
         std::cout << name << " ";
     }
