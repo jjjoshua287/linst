@@ -55,10 +55,7 @@ inline std::vector<Category> getPackageData() {
         {
             "Communication",
             {
-                // Discord can be repo-available on many distros, but not universally.
-                // Keeping it repo-only is fine; if missing, your skip behavior covers it.
                 {"discord", "Voice and text chat (availability varies by distro)", "", "", "discord"},
-
                 {"telegram", "Telegram Desktop client", "", "", "telegram-desktop"}
             }
         },

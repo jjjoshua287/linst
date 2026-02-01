@@ -15,7 +15,6 @@ struct DistroConfig {
     std::string cmd; // Install command prefix (e.g. `sudo dnf install -y`)
 };
 
-// Namespace
 namespace DistroDetector {
 
     // Reads /etc/os-release and fills in the DistroInfo struct

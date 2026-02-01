@@ -16,7 +16,6 @@ static bool containsWord(const std::string& sentence, const std::string& word) {
     return false;
 }
 
-
 namespace DistroDetector {
 
     DistroInfo getDistroInfo(){
